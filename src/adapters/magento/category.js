@@ -96,6 +96,8 @@ class CategoryAdapter extends AbstractMagentoAdapter {
       if (this.config.seo.useUrlDispatcher) {
         item.url_path = this.config.seo.categoryUrlPathMapper(item)
       } else {               
+        console.log("---------- LOOK FOR ME IM DOING THIS ---------");
+
         item.url_path = item.url_key;
       }
 

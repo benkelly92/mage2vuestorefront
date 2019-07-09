@@ -17,7 +17,13 @@ module.exports = {
       return destPath
     },
     categoryUrlPathMapper: (category) => {
+      
+      console.warn('THE URL PATH IS: ', category.url_path)
+      
       const destSlug = (category.url_path ? category.url_path + '/': '') + category.url_key
+
+
+
       console.log('Dest. cat path = ', destSlug)
       return destSlug
     },
