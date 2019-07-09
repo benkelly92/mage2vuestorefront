@@ -8,11 +8,10 @@ module.exports = {
       let destPath = ''
       if (product.category && product.category.length > 0) {
         const firstCat = product.category[0]
-        destPath = (firstCat.path ? (firstCat.path) : _slugify(firstCat.name)) + '/' + (product.slug ? product.slug : _slugify(product.name + '-' + product.id))
+        destPath = (firstCat.path ? (firstCat.path) : _slugify(firstCat.name)) + '/' + (product.slug ? product.slug : _slugify(product.name))
       } else {
-        destPath = (product.slug ? product.slug : _slugify(product.name + '-' + product.id))
+        destPath = (product.slug ? product.slug : _slugify(product.name))
       }
-      destPath += '.html'
       console.log('Dest. product path = ', destPath)
       return destPath
     },
