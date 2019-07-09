@@ -10,14 +10,15 @@ module.exports = {
         const firstCat = product.category[0]
         destPath = (firstCat.path ? (firstCat.path) : _slugify(firstCat.name)) + '/' + (product.slug ? product.slug : _slugify(product.name + '-' + product.id))
       } else {
-        destPath = (product.slug ? product.slug : _slugify(product.name))
+        destPath = (product.slug ? product.slug : _slugify(product.name + '-' + product.id))
       }
+      destPath += '.html'
       console.log('Dest. product path = ', destPath)
       return destPath
     },
     categoryUrlPathMapper: (category) => {
      
-      const destSlug = simplifiyCategoryLink(category)
+      const destSlug = category.url_path
 
       return destSlug
     },
