@@ -20,9 +20,10 @@ module.exports = {
       
       console.warn('THE URL PATH IS: ', category.url_path)
       
-      const destSlug = (category.url_path ? category.url_path + '/': '') + category.url_key
 
+      // const destSlug = (category.url_path ? category.url_path + '/': '') + category.url_key
 
+      const destSlug = category.url_path
 
       console.log('Dest. cat path = ', destSlug)
       return destSlug
