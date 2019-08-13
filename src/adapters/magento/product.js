@@ -412,8 +412,8 @@ class ProductAdapter extends AbstractMagentoAdapter {
 
               item.configurable_children = new Array()
               for (let prOption of result) {
-                console.log('Sorting out children')
-
+                console.log('------------------------ Sorting out children ---------------------')
+                console.log(prOption)
                 let confChild = {
                   sku: prOption.sku,
                   id: prOption.id,
