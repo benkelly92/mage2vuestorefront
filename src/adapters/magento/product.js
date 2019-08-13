@@ -472,9 +472,13 @@ class ProductAdapter extends AbstractMagentoAdapter {
                   })
                 })
 
+              
+
                 item.configurable_children.push(confChild);
                 if(item.price  == 0) // if price is zero fix it with first children
                   item.price = prOption.price;
+
+              }
              
 
               // EXPAND CONFIGURABLE CHILDREN ATTRS
