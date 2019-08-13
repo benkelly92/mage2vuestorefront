@@ -410,6 +410,8 @@ class ProductAdapter extends AbstractMagentoAdapter {
           return new Promise ((opResolve, opReject) => {
             this.api.configurableChildren.list(item.sku).then((result) => {
 
+
+
               item.configurable_children = new Array()
               for (let prOption of result) {
                 console.log('------------------------ Sorting out children ---------------------')
@@ -451,8 +453,11 @@ class ProductAdapter extends AbstractMagentoAdapter {
                   }
                 }
 
-                subSyncPromises.push(() => {
-                  return this.api.productMedia.list(confChild.sku).then((result) => {
+                let childPromises = []
+
+                childPromises.push(new Promise((resolve, reject) => {
+    
+                  this.api.productMedia.list(confChild.sku).then((result) => {
                     let media_gallery = []
                     for (let mediaItem of result){
                       console.log('Media Item -------------------------------------------')
@@ -468,13 +473,18 @@ class ProductAdapter extends AbstractMagentoAdapter {
                       }
                     }
                     confChild.media_gallery = media_gallery
-                    return confChild
+                    resolve(confChild)
                   })
+                }))
+                
+                Promise.all(childPromises).then((res) => {
+                  logger.info('Child media galleries created')
                 })
 
               
 
-                item.configurable_children.push(confChild);
+
+                item.configurable_children.push(confChild)
                 if(item.price  == 0) // if price is zero fix it with first children
                   item.price = prOption.price;
 
