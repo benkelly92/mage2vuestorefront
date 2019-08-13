@@ -418,6 +418,7 @@ class ProductAdapter extends AbstractMagentoAdapter {
                   status: prOption.status,
                   visibility: prOption.visibility,
                   name: prOption.name,
+                  media_gallery: prOption.media_gallery,
                   price: prOption.price,
                   tier_prices: prOption.tier_prices
                   // custom_attributes: prOption.custom_attributes
