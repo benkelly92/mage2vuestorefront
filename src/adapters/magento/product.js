@@ -421,7 +421,6 @@ class ProductAdapter extends AbstractMagentoAdapter {
                   visibility: prOption.visibility,
                   name: prOption.name,
                   big_test: 'Hello there',
-                  media_gallery: prOption.media_gallery,
                   price: prOption.price,
                   tier_prices: prOption.tier_prices
                   // custom_attributes: prOption.custom_attributes
@@ -451,6 +450,26 @@ class ProductAdapter extends AbstractMagentoAdapter {
 
                   }
                 }
+
+                subSyncPromises.push(() => {
+                  return this.api.productMedia.list(confChild.sku).then((result) => {
+                    let media_gallery = []
+                    for (let mediaItem of result){
+                      console.log('Media Item -------------------------------------------')
+                      console.log(mediaItem)
+                      if (!mediaItem.disabled) {
+                        media_gallery.push({
+                          image: mediaItem.file,
+                          pos: mediaItem.position,
+                          typ: mediaItem.media_type,
+                          lab: mediaItem.label,
+                          vid: this.computeVideoData(mediaItem)
+                        })
+                      }
+                    }
+                    confChild.media_gallery = media_gallery
+                    return confChild
+                })
 
                 item.configurable_children.push(confChild);
                 if(item.price  == 0) // if price is zero fix it with first children
