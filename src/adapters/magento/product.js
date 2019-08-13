@@ -297,6 +297,8 @@ class ProductAdapter extends AbstractMagentoAdapter {
           return this.api.productMedia.list(item.sku).then((result) => {
             let media_gallery = []
             for (let mediaItem of result){
+              console.log('Media Item -------------------------------------------')
+              console.log(mediaItem)
               if (!mediaItem.disabled) {
                 media_gallery.push({
                   image: mediaItem.file,
